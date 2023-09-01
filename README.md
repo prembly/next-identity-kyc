@@ -1,38 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# next-identity-kyc
 
-## Getting Started
+> IdentityPass NextJS Verification library
 
-First, run the development server:
+> INTRODUCING PREMBLY 2.0
+
+[![NPM](https://img.shields.io/npm/v/react-identity-kyc.svg)](https://www.npmjs.com/package/react-identity-kyc) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+## Install
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm install --save next-identity-kyc
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```jsx
+import React from "react";
+import useIdentityPayKYC from "react-identity-kyc";
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+const App = () => {
+  const config = {
+    first_name: "test",
+    last_name: "test",
+    email: "kayode@myidentitypass.com",
+    merchant_key: "",
+    user_ref: "a unique ref for your user",
+    is_test: false, //set this to through for a test
+    config_id: "<configuration ID retrieve from your widget settings", //optional
+    callback: (response) => console.log(response),
+  };
+  const verifyWithIdentity = useIdentityPayKYC(config);
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+  return <button onClick={verifyWithIdentity}>Click to Test</button>;
+};
+export default App;
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```jsx
+RESPONSES
 
-## Learn More
+1. Failed response:
+         {
+          code: "E01",
+          message: "Message goes here",
+          status: "failed"
+      }
 
-To learn more about Next.js, take a look at the following resources:
+ 2. Cancelled
+      {
+          code: "E02",
+          message: "Verification Canceled",
+          status: "failed"
+      }
+ 3. Success
+        {
+          code: "00",
+          status: "success",
+          message: "Verification Successful",
+          data:{
+              //Verification data goes here
+              // kindly check official documentation for data structure for each channel
+              //https://developer.myidentitypass.com
+              },
+          channel:"Channel goes here", e.g BVN,NIN and many more
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+      }
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+MIT © [kayode001(Kayode Olayiwola)](https://github.com/kayode001)
+"# next-identity-kyc"
