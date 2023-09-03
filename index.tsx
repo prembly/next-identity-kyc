@@ -2,7 +2,7 @@
 "use client";
 import { useEffect } from "react";
 
-import { useIdentityScriptLoader } from "./components/loadScript";
+import { useIdentityScriptLoader } from "./src/components/loadScript";
 
 declare global {
   interface Window {

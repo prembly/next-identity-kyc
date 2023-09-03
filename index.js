@@ -2,8 +2,7 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { useIdentityScriptLoader } from './components/loadScript'
-
+import {useIdentityScriptLoader} from './src/components/loadScript'
 
 const useIdentityPayKYC = (props) => {
   const [scriptLoaded, scriptError] = useIdentityScriptLoader()

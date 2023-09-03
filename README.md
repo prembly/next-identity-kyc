@@ -16,7 +16,7 @@ npm install --save next-identity-kyc
 
 ```jsx
 import React from "react";
-import useIdentityPayKYC from "react-identity-kyc";
+import useIdentityPayKYC from "next-identity-kyc";
 
 const App = () => {
   const config = {
